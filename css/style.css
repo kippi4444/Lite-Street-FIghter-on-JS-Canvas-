@@ -1,0 +1,316 @@
+body {
+    padding: 20px;
+    margin: 0;
+    font-family: 'Exo 2', sans-serif;
+    box-sizing: border-box;
+    background-image: url(../img/bgame.jpg);
+}
+
+*:focus {
+    outline: none;
+}
+
+.content {
+                
+
+    display: block;
+    width: 80%;
+    height: 80%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px black solid;
+    background-image: url(../img/rocktext.jpg);
+    /* background-image: url(img/mainBG.jpg);
+background-size: 100%; */
+}
+
+canvas {
+    display: block;
+    border: 1px black solid;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 10px 8px black;
+}
+
+
+/* change characters */
+
+.characters {
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+#player1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 1;
+    margin: 5px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 1px solid black;
+    border-radius: 1%;
+}
+
+#player2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 1;
+    margin: 5px;
+    background-color: rgba(50, 0, 255, 0.5);
+    border: 1px solid black;
+    border-radius: 1%;
+}
+
+.backNextButtons {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    justify-self: stretch;
+}
+
+.faces {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 2;
+}
+#maps  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 2;
+
+}
+#maps img {
+    margin: 0.5%;
+    border: 1px solid black;
+    border-radius: 1%;
+    width: 90%;
+    height: 90%;
+
+}
+
+.maps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 2;
+}
+.maps button{
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5%;
+    border: none;
+}
+.maps button:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+}
+.maps button img{
+    border: 1px solid black;
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid black;
+    border-radius: 5%;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 5px;
+    font-size: 1.5vw;
+    color: whitesmoke;
+    text-shadow:1px 1px black;
+}
+button img{
+    display: flex;
+    overflow: hidden;
+    width:100%;
+    min-width: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 5%;
+    opacity: 0.7;
+}
+button img:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+
+button:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+    color:white;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: rgba(0, 0, 0, 0.6);
+    color:gray;
+    border: 1px solid white;
+    cursor: pointer;
+}
+/* form enter */
+.enter_button button{
+    background-color: rgba(0, 0, 0, 0.4);
+    border:rgba(255, 255, 255, 0.5);
+    border-radius:3px ;
+    color: rgba(255, 255, 255, 1);
+    display: block;
+    position: absolute; 
+    left:70%;
+    margin-top: 0.2% ;
+    text-shadow:1px 1px rgba(0, 0, 0, 0.5);
+
+}
+
+.enter_button button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    border:  rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
+    text-shadow:1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.enter {
+    left:39%;
+    top:30%;
+    width: 25%;
+    font-size: 1.4vw;
+    border-radius: 2%;
+    display: none;
+    position: absolute;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: white solid 1px;
+    z-index:2;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+    text-shadow:1px 1px white;
+    box-shadow: inset 0 0 10px 2px rgba(255, 255, 255, 0.8);
+}
+.enter li {
+   width: 90%;
+    display: grid;
+    grid-template-columns: 0.7fr 0.7fr;
+    grid-template-rows: 0.5fr  ;
+    list-style: none;
+    margin:5%;
+
+}
+
+.enter input {
+    width: 100%;
+    height: 70%;
+    border: 1px solid #aaa;
+    box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+    border-radius: 2px;
+
+}
+
+.enter input:focus {
+    background: #fff;
+    border: 1px solid #555;
+    box-shadow: 0 0 3px #aaa;
+}
+
+.back{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1 ;
+    background: rgba(0, 0, 0, 0.6);
+
+}
+.enter_close {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    width: 5%;
+    height: 10%;
+    vertical-align: middle;
+    overflow: hidden;
+    font-weight: bold;
+    text-indent: 0.25vw;
+    font-size: 1.1vw;
+    color:black;
+    background-color: rgba(0, 0, 0, 0);;
+    text-decoration: none;
+}
+#info {
+    text-align: center;
+    grid-column: span 2;
+    color:red;
+}
+
+nav {
+    width: 90%;
+    height: 80%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+    border: 1px gray solid;
+    position: relative;
+    text-align: center;
+    font-size: 2.5vw;
+    text-shadow: 1px 2px 2px black;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 10px 8px black;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* background-image: url(img/mainBG.jpg) ; */
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav a,
+nav a:visited {
+    color: yellow;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+nav a.active,
+nav a:hover {
+    text-decoration: none;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: #fff;
+}
+
+#mainMenu {
+    display: block;
+}
+
+#pauseMenu {
+    display: none;
+}
+#allPlayersStats{
+
+    margin: 5%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+tr{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+th{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
