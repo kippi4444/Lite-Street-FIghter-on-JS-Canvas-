@@ -94,10 +94,10 @@ const spaFighter = {
                             <button value="1"><img src="img/characters/faces/ken.png"></button>
                             <button value="2"><img src="img/characters/faces/barlog.png"></button>
                             <button value="3"><img src="img/characters/faces/chunli.png"></button>
-                            <button value="4"><img src="img/characters/faces/deejay.png"></button>
-                            <button value="5"><img src="img/characters/faces/ehonda.png"></button>
-                            <button value="6"><img src="img/characters/faces/feilong.png"></button>
-                            <button value="7"><img src="img/characters/faces/guile.png"></button>
+                            <button value=""><img src="img/characters/faces/deejay.png"></button>
+                            <button value=""><img src="img/characters/faces/ehonda.png"></button>
+                            <button value=""><img src="img/characters/faces/feilong.png"></button>
+                            <button value=""><img src="img/characters/faces/guile.png"></button>
                         </div>
                         <div class="backNextButtons">
                             <button href="#main" value="8">Назад</button><button href="#game" value="9">ОК</button>
@@ -112,10 +112,10 @@ const spaFighter = {
                             <button value="1"><img src="img/characters/faces/ken.png"></button>
                             <button value="2"><img src="img/characters/faces/barlog.png"></button>
                             <button value="3"><img src="img/characters/faces/chunli.png"></button>
-                            <button value="4"><img src="img/characters/faces/deejay.png"></button>
-                            <button value="5"><img src="img/characters/faces/ehonda.png"></button>
-                            <button value="6"><img src="img/characters/faces/feilong.png"></button>
-                            <button value="7"><img src="img/characters/faces/guile.png"></button>
+                            <button value=""><img src="img/characters/faces/deejay.png"></button>
+                            <button value=""><img src="img/characters/faces/ehonda.png"></button>
+                            <button value=""><img src="img/characters/faces/feilong.png"></button>
+                             <button value=""><img src="img/characters/faces/guile.png"></button>
                         </div>
                         <div class="backNextButtons">
                             <button href="#main" value="8">Назад</button><button href="#maps" value="9">ОК</button>
@@ -136,7 +136,7 @@ const spaFighter = {
                    </table> 
                    </div>
                     <div class="backNextButtons">
-                        <button href="#main" >Назад</button>
+                        <button href="#main" value="8">Назад</button>
                     </div>
                 </div>`,
 //=======block statistic=======//
@@ -173,6 +173,7 @@ const spaFighter = {
 </nav>`,
 //=======block game 1=======//
         game: `
+        <div class="enter_button"><button id="soundOnOff">Звук Вкл</button></div>
         <nav id="pauseMenu">
             <ul class="mainmenu__list pause">
                 <li><a class="mainmenu__link" href="#restart">Начать заново</a></li>
@@ -181,10 +182,11 @@ const spaFighter = {
                 <li><a class="mainmenu__link" href="#keys">Управление</a></li>
             </ul>
         </nav>
-        <div class="enter_button"><button id="soundOnOff">Вкл <i class="fas fa-volume-up"></i></button></div>
-        <canvas id="cnv"  style=" z-index: 0;"> 111</canvas>`,
+
+        <canvas id="cnv"  style=" z-index: 0;"> </canvas>`,
 //=======block game 2=======//
         game2: `
+        <div class="enter_button"><button id="soundOnOff">Звук Вкл </button></div>
         <nav id="pauseMenu">
             <ul class="mainmenu__list pause">
                 <li><a class="mainmenu__link" href="#restart2">Начать заново</a></li>
@@ -193,8 +195,8 @@ const spaFighter = {
                 <li><a class="mainmenu__link" href="#keys">Управление</a></li>
             </ul>
         </nav>
-        <div class="enter_button"><button id="soundOnOff">Вкл <i class="fas fa-volume-up"></i></button></div>
-        <canvas id="cnv"  style=" z-index: 0;"> 111</canvas>`,
+
+        <canvas id="cnv"  style=" z-index: 0;"> </canvas>`,
 //=======block error=======//
         error404: "<h2>404</h2><p>Страница не найдена</p>",
     }
@@ -266,6 +268,7 @@ function startListeners(){
                     spaFighter.state.page="game";
                     window.location.href = `${spaFighter.host}#${spaFighter.state.page}`;
                     updateState();
+                    setTimeout(game(changePlayer1, changePlayer2, map, false),10);
                 }, 1000);
 
             break;
@@ -281,7 +284,7 @@ function startListeners(){
             break;
         case "game" :
               
-                let chars=["Ken","Barlog"];
+                let chars=["Ken","Barlog","Ryu", "Chun Li"];
                 let maps=["bg","bg2","bg3","bg4","bg5"];
                 changePlayer2 = chars[Math.floor(Math.random()*chars.length)];
                 map=maps[Math.floor(Math.random()*maps.length)];
@@ -461,7 +464,6 @@ function getStatsAllUsers(){
     .then(function(querySnapshot) {
 
             querySnapshot.forEach(function(doc) {
-                // getDataUser= doc.data();
 
                 allUsersStats.push(doc.data());
                 
@@ -498,9 +500,9 @@ function updateSelectedChar2() {
     if (this.value){
         let changeCharacters= document.getElementsByClassName("faces")[0];
             changeCharacters.oncontextmenu = function(e) {
-            e.preventDefault();
-    };
-        if (this.value < 9) {
+                e.preventDefault();
+            };
+        if (this.value < 8) {
             player2.innerHTML = `<img src="${spaFighter.allCharImgSrc.get(Number(this.value)).src}">`;
             changePlayer2 = spaFighter.allCharImgSrc.get(Number(this.value)).name;
         }
@@ -544,7 +546,7 @@ function updateState() {
 
 
   
-    let init = function() { // вешаем слушателей на событие hashchange и кликам по пунктам меню
+let init = function() { // вешаем слушателей на событие hashchange и кликам по пунктам меню
  //добавляем меню на страницу
       updateState();
   
@@ -568,6 +570,6 @@ function updateState() {
         
       });
       
-    }
+}
   
-    window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded', init);
