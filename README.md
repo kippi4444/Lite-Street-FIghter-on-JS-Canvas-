@@ -4,3 +4,6 @@ If you want started this project in your PC, please connect your SDK Firebase.
 After that, create new collectoin "Users" in FIRESTORE.
 
 https://streetfighter-js-bd-users.firebaseapp.com/
+
+
+v1.3b
