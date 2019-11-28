@@ -370,10 +370,21 @@ let game =function (player1, player2, map, npc) {
                             'onend': null,
                             'damage': 0,
                             'sound': null,
-                            'soundSrc': `sounds/${name.slice(1)}/block.wav`,
-
+                            'soundSrc': `sounds/none.wav`,
                         }; 
-
+                        this.kickSit = {
+                            'el': null,
+                            'src': `img/characters/${name}kicksit.png`,
+                            'step': 0,
+                            'speed': 6,
+                            'curr': 0,
+                            'steps': 2,
+                            'onend': 'sit',
+                            'damage': 6,
+                            'sound': null,
+                            'soundSrc': `sounds/${name.slice(1)}/kick.wav`,
+                            'points': 2,
+                        }; 
                         this.dead = {
                             'el': null,
                             'src': `img/characters/${name}dead.png`,
@@ -551,10 +562,33 @@ let game =function (player1, player2, map, npc) {
                 //---------------------------------------1-2person-------------------------//
                 self.baseLogic = function() {
                     if(lPlayer1Man.at == "sit"){
-                        return false;
+                        if(rPlayer2Man.at != "sit" && rPlayer2Man.at != "kickSit"){
+                            return false;
+                        }else{
+                            return true;
+                        }
                     }
                     if(rPlayer2Man.at == "sit"){
+                        if(lPlayer1Man.at != "sit" && lPlayer1Man.at != "kickSit"){
                         return false;
+                        }else{
+                            return true;
+                        }
+                    }
+                    if (lPlayer1Man.at == "block") {
+                        if(rPlayer2Man.at != "kickSit"){
+                            return false;
+                         }else{
+                            return true;
+                         }
+                    }
+                    if (rPlayer2Man.at == "block") {
+                        if(lPlayer1Man.at != "kickSit"){
+                            return false;
+                         }else{
+                            return true;
+                         }
+                  
                     }
                     if ((rPlayer2Man.x >= lPlayer1Man.x) && (rPlayer2Man.x + rPlayer2Man.w / 1.7 <= lPlayer1Man.x) && (rPlayer2Man.y >= lPlayer1Man.y + lPlayer1Man.h / 2) && (rPlayer2Man.y + rPlayer2Man.h <= lPlayer1Man.y + lPlayer1Man.h / 2)) {
                         return true;
@@ -570,16 +604,6 @@ let game =function (player1, player2, map, npc) {
 
                 };
 
-                self.blockLogic = function() { //логика блока
-                    if (lPlayer1Man.at == "block") {
-                        return false;
-                    }
-                    if (rPlayer2Man.at == "block") {
-                        return false;
-                    }
-                    return true;
-
-                };
                         //-----1 player-----//
                 self.startPlayer1 = function(man1, animation, state) {
 
@@ -602,9 +626,9 @@ let game =function (player1, player2, map, npc) {
                                  //===points===///
                             
                                 if (lPlayer1Animate[lPlayer1Man.at].damage >= rPlayer2Man.health) 
-                                    rPlayer2Man.health = self.baseLogic() && self.blockLogic() ? (rPlayer2Man.health - rPlayer2Man.health) : (rPlayer2Man.health);
+                                    rPlayer2Man.health = self.baseLogic() ? (rPlayer2Man.health - rPlayer2Man.health) : (rPlayer2Man.health);
                                 if (lPlayer1Animate[lPlayer1Man.at].damage < rPlayer2Man.health) 
-                                    rPlayer2Man.health = self.baseLogic() && self.blockLogic() ? (rPlayer2Man.health - lPlayer1Animate[lPlayer1Man.at].damage) : (rPlayer2Man.health);
+                                    rPlayer2Man.health = self.baseLogic() ? (rPlayer2Man.health - lPlayer1Animate[lPlayer1Man.at].damage) : (rPlayer2Man.health);
                             } else if (rPlayer2Man.health <= 0) {
                                 ++modelSettings.lPlayer1Win; //счетчик побед для 
                                 modelSettings.playerKO+=Number(modelSettings.lPlayer1Win);
@@ -643,10 +667,10 @@ let game =function (player1, player2, map, npc) {
 
                                 if (lPlayer1Man.health > 0) {
                                     if (rPlayer2Animate[rPlayer2Man.at].damage>=lPlayer1Man.health)  //корректная отрисовка жизни при большем дамаге чем остаток жизни
-                                        lPlayer1Man.health = self.baseLogic() && self.blockLogic() ? (lPlayer1Man.health - lPlayer1Man.health) : (lPlayer1Man.health);
+                                        lPlayer1Man.health = self.baseLogic()  ? (lPlayer1Man.health - lPlayer1Man.health) : (lPlayer1Man.health);
                                     
                                     if(lPlayer1Man.health > rPlayer2Animate[rPlayer2Man.at].damage)
-                                        lPlayer1Man.health = self.baseLogic() && self.blockLogic() ? (lPlayer1Man.health - rPlayer2Animate[rPlayer2Man.at].damage) : (lPlayer1Man.health);
+                                        lPlayer1Man.health = self.baseLogic()  ? (lPlayer1Man.health - rPlayer2Animate[rPlayer2Man.at].damage) : (lPlayer1Man.health);
                                 } else if (lPlayer1Man.health <= 0) {
                                     ++modelSettings.rPlayer2Win; //счетчик побед правого игрока
                                     lPlayer1Man.health = 0.1; //жесткое присваивание жизней, чтобы корректно рисовалось и не успевало защитать две победы (да не оч красиво, но работает)
@@ -768,17 +792,20 @@ let game =function (player1, player2, map, npc) {
                             let movesToLeft=[
                                     function(){self.startPlayer2(rPlayer2Man.name, "jump", -3)},
                                     function(){self.startPlayer2(rPlayer2Man.name, "movee", -1)},
+                                    function(){self.startPlayer2(rPlayer2Man.name, "movee", -1)},
                             ];
 
                             let movesToRight=[
-                            function(){self.startPlayer2(rPlayer2Man.name, "jump", 3)},
-                            function(){self.startPlayer2(rPlayer2Man.name, "movee", 1)},
+                                 function(){self.startPlayer2(rPlayer2Man.name, "jump", 3)},
+                                 function(){self.startPlayer2(rPlayer2Man.name, "movee", 1)},
+                                 function(){self.startPlayer2(rPlayer2Man.name, "movee", 1)},
                              ];
 
                             let movesFight=[
                                 function(){self.startPlayer2(rPlayer2Man.name, "pow", 0)},
                                 function(){self.startPlayer2(rPlayer2Man.name, "kick", 0)},
                                 function(){self.startPlayer2(rPlayer2Man.name, "block", 0)},
+                                function(){self.startPlayer2(rPlayer2Man.name, "kickSit", 0)},
                                 ];
                             let playMoveToLeft=movesToLeft[Math.floor(Math.random()*movesToLeft.length)];
                             let playMoveToRight=movesToRight[Math.floor(Math.random()*movesToRight.length)];
@@ -838,6 +865,7 @@ let game =function (player1, player2, map, npc) {
                         keyMoveLeft: "KeyA",
                         keyMoveRight: "KeyD",
                         keyKick: "KeyG",
+                        keyKickSit: "KeyV",
                         keyPow: "KeyF",
                         keyBlock: "KeyR"
                     },
@@ -849,6 +877,7 @@ let game =function (player1, player2, map, npc) {
                         rPlayer2.keyMoveLeft="ArrowLeft";
                         rPlayer2.keyMoveRight= "ArrowRight";
                         rPlayer2.keyKick= "Numpad6";
+                        rPlayer2.keyKickSit= "Numpad3";
                         rPlayer2.keyPow= "Numpad5";
                         rPlayer2.keyBlock= "Numpad8";
                     }
@@ -901,6 +930,11 @@ let game =function (player1, player2, map, npc) {
                                     rightPlayer = setInterval(fModel.startPlayer2(rPlayer2.name, "block", 0), 0);
                                 }
                                 break;
+                            case rPlayer2.keyKickSit:
+                                if (!rightPlayer) {
+                                    rightPlayer = setInterval(fModel.startPlayer2(rPlayer2.name, "kickSit", 0), 0);
+                                }
+                                break;
                         //===========================================1 player=============================================//
                             case (lPlayer1.keyPow):
                                 if (!leftPlayer) {
@@ -917,7 +951,12 @@ let game =function (player1, player2, map, npc) {
                                         leftPlayer = setInterval( fModel.startPlayer1(lPlayer1.name, "block", 0),    0);
                                     }
                                 break;
-                        }
+                            case (lPlayer1.keyKickSit):
+                                if (!leftPlayer) {
+                                    leftPlayer = setInterval( fModel.startPlayer1(lPlayer1.name, "kickSit", 0),    0);
+                                }
+                            break;
+                            }
                         }
                     }
                     //--------------------------------key up---------------------------------------//
@@ -937,6 +976,10 @@ let game =function (player1, player2, map, npc) {
                                     clearInterval(rightPlayer);
                                     rightPlayer = 0;
                                     break;
+                                case rPlayer2.keyKickSit:
+                                    clearInterval(rightPlayer);
+                                    rightPlayer = 0;
+                                    break;
                                 case (lPlayer1.keyPow):
                                     clearInterval(leftPlayer);
                                     leftPlayer = 0;
@@ -946,6 +989,10 @@ let game =function (player1, player2, map, npc) {
                                     leftPlayer = 0;
                                     break;
                                 case (lPlayer1.keyBlock):
+                                    clearInterval(leftPlayer);
+                                    leftPlayer = 0;
+                                    break;
+                                case (lPlayer1.keyKickSit):
                                     clearInterval(leftPlayer);
                                     leftPlayer = 0;
                                     break;
@@ -1030,6 +1077,8 @@ let game =function (player1, player2, map, npc) {
                     }
                     runOnKeys(() => fModel.startPlayer1(lPlayer1.name, "jump", 3), lPlayer1.keyMoveUp, lPlayer1.keyMoveRight);
                     runOnKeys(() => fModel.startPlayer1(lPlayer1.name, "jump", -3), lPlayer1.keyMoveUp, lPlayer1.keyMoveLeft);
+     
+
                     runOnKeys(() => fModel.startPlayer2(rPlayer2.name, "jump", 3), rPlayer2.keyMoveUp, rPlayer2.keyMoveRight);
                     runOnKeys(() => fModel.startPlayer2(rPlayer2.name, "jump", -3), rPlayer2.keyMoveUp, rPlayer2.keyMoveLeft);
 

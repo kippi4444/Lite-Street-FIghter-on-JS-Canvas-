@@ -127,11 +127,12 @@ const spaFighter = {
                    <table id="allPlayersStats">
                    <tr><th><h3> Движение для 1 Игрока:</h3></th><th> <h3>Движение для 2 Игрока:</h3></th></tr>
                    <tr><th> w - прыжок</th><th>Arrow Up - прыжок</th></tr>
-                   <tr><th>s - ниче</th><th>Arrow Down - ниче</th></tr>
+                   <tr><th>s - присесть</th><th>Arrow Down - присесть</th></tr>
                    <tr><th>a - движение влево</th><th>Arrow Left - движение влево</th></tr>
                    <tr><th>d - движение вправо</th><th>Arrow Right - движение вправо</th></tr>
                    <tr><th>f - легкий удар</th><th>Num 5 - легкий удар</th></tr>
                    <tr><th>g - тяжелый удар</th><th> Num 6 - тяжелый удар</th></tr>
+                   <tr><th>v - средний удар в приседе</th><th> Num 3 - средний удар в приседе</th></tr>
                    <tr><th>r - блок</th><th>  Num 8 - блок</th></tr>
                    </table> 
                    </div>
