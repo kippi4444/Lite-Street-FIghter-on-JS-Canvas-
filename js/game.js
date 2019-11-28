@@ -360,6 +360,19 @@ let game =function (player1, player2, map, npc) {
                             'soundSrc': `sounds/${name.slice(1)}/block.wav`,
                             'points': 1,
                         }; 
+                        this.sit = {
+                            'el': null,
+                            'src': `img/characters/${name}sit.png`,
+                            'step': 0,
+                            'speed': 7,
+                            'curr': 0,
+                            'steps': 1,
+                            'onend': null,
+                            'damage': 0,
+                            'sound': null,
+                            'soundSrc': `sounds/${name.slice(1)}/block.wav`,
+
+                        }; 
 
                         this.dead = {
                             'el': null,
@@ -537,13 +550,19 @@ let game =function (player1, player2, map, npc) {
 
                 //---------------------------------------1-2person-------------------------//
                 self.baseLogic = function() {
+                    if(lPlayer1Man.at == "sit"){
+                        return false;
+                    }
+                    if(rPlayer2Man.at == "sit"){
+                        return false;
+                    }
                     if ((rPlayer2Man.x >= lPlayer1Man.x) && (rPlayer2Man.x + rPlayer2Man.w / 1.7 <= lPlayer1Man.x) && (rPlayer2Man.y >= lPlayer1Man.y + lPlayer1Man.h / 2) && (rPlayer2Man.y + rPlayer2Man.h <= lPlayer1Man.y + lPlayer1Man.h / 2)) {
                         return true;
                     }
                     if ((lPlayer1Man.x <= rPlayer2Man.x) && (lPlayer1Man.x + lPlayer1Man.w / 1.7 >= rPlayer2Man.x) && (lPlayer1Man.y <= rPlayer2Man.y + rPlayer2Man.h / 2) && (lPlayer1Man.y + lPlayer1Man.h >= rPlayer2Man.y + rPlayer2Man.h / 2)) {
                         return true;
                     }
-
+                    
                     (rPlayer2Man.x <= 5) ? (rPlayer2Man.x = 5) : (rPlayer2Man.x);
                     (lPlayer1Man.x <= 5) ? (lPlayer1Man.x = 5) : (lPlayer1Man.x);
                     (rPlayer2Man.x >= canvasWidth - rPlayer2Man.w) ? (rPlayer2Man.x = canvasWidth - rPlayer2Man.w) : (rPlayer2Man.x);
@@ -815,6 +834,7 @@ let game =function (player1, player2, map, npc) {
                     lPlayer1 = {
                         name: "",
                         keyMoveUp: "KeyW",
+                        keyMoveDown: "KeyS",
                         keyMoveLeft: "KeyA",
                         keyMoveRight: "KeyD",
                         keyKick: "KeyG",
@@ -825,6 +845,7 @@ let game =function (player1, player2, map, npc) {
                         name: ""};
                     if(!npc){
                         rPlayer2.keyMoveUp="ArrowUp";
+                        rPlayer2.keyMoveDown="ArrowDown";
                         rPlayer2.keyMoveLeft="ArrowLeft";
                         rPlayer2.keyMoveRight= "ArrowRight";
                         rPlayer2.keyKick= "Numpad6";
@@ -961,6 +982,9 @@ let game =function (player1, player2, map, npc) {
                         if (keys[rPlayer2.keyMoveUp]) {
                             fModel.startPlayer2(rPlayer2.name, "jump", 0);
                         }
+                        if (keys[rPlayer2.keyMoveDown]) {
+                            fModel.startPlayer2(rPlayer2.name, "sit", 0);
+                        }
 
                         if (keys[lPlayer1.keyMoveUp]) {
                             fModel.startPlayer1(lPlayer1.name, "jump", 0);
@@ -971,6 +995,9 @@ let game =function (player1, player2, map, npc) {
                         if (keys[lPlayer1.keyMoveLeft]) {
                             fModel.startPlayer1(lPlayer1.name, "movee", -1);
                         }
+                        if (keys[lPlayer1.keyMoveDown]) {
+                            fModel.startPlayer1(lPlayer1.name, "sit", 0);
+                        }                        
                     }
 
                     function runOnKeys(func, ...codes) {

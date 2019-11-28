@@ -177,9 +177,8 @@ const spaFighter = {
         <nav id="pauseMenu">
             <ul class="mainmenu__list pause">
                 <li><a class="mainmenu__link" href="#restart">Начать заново</a></li>
-                <li><a class="mainmenu__link" href="#characters">Выбрать персонажа</a></li>
+                <li><a class="mainmenu__link" href="#characters2">Выбрать персонажа</a></li>
                 <li><a class="mainmenu__link" href="#main">Главное меню</a></li>
-                <li><a class="mainmenu__link" href="#keys">Управление</a></li>
             </ul>
         </nav>
 
@@ -192,7 +191,6 @@ const spaFighter = {
                 <li><a class="mainmenu__link" href="#restart2">Начать заново</a></li>
                 <li><a class="mainmenu__link" href="#characters">Выбрать персонажа</a></li>
                 <li><a class="mainmenu__link" href="#main">Главное меню</a></li>
-                <li><a class="mainmenu__link" href="#keys">Управление</a></li>
             </ul>
         </nav>
 
