@@ -267,7 +267,7 @@ function startListeners(){
                     spaFighter.state.page="game";
                     window.location.href = `${spaFighter.host}#${spaFighter.state.page}`;
                     updateState();
-                    setTimeout(game(changePlayer1, changePlayer2, map, false),10);
+                    
                 }, 1000);
 
             break;

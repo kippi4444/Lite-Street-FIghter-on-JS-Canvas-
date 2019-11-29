@@ -253,6 +253,7 @@ let game =function (player1, player2, map, npc) {
                     modelSettings.lPlayer1 = man1;
                     modelSettings.rPlayer2 = man2;
                     fView.startAnimation();
+                    
                     if(npc){
                         self.npcStart();
                     }
@@ -1113,7 +1114,7 @@ let game =function (player1, player2, map, npc) {
                     console.log("clean");
                 }
             }
-    
+      
             startGame=false;
         }
     }else{
