@@ -5,21 +5,10 @@ let startGame=true;
 let game =function (player1, player2, map, npc) {
 
     let canvasRects = document.getElementById('cnv')
-            
-    if (window.innerWidth > 1024 ) {
-        canvasRects.width = 900;
-        canvasRects.height = 410;
-    }
-    if (window.innerWidth <= 1024 && window.innerWidth > 800 ) {
-        
-        canvasRects.width = 600;
-        canvasRects.height = canvasRects.width * 410 / 900;
-    }
-    if (window.innerWidth <= 800) {
-        
-        canvasRects.width = 400;
-        canvasRects.height = canvasRects.width * 410 / 900;
-    }
+
+        canvasRects.width = 1280;
+        canvasRects.height = 584;
+
 
     let canvasHeight = canvasRects.height;
     let canvasWidth = canvasRects.width;
@@ -121,7 +110,7 @@ let game =function (player1, player2, map, npc) {
                     //---names selected characters---//
                     viewSettings.colorlPlayer1 = (colorState == "lPlayer1") ? ("yellow") : (viewSettings.colorlPlayer1);
                     viewSettings.colorrPlayer2 = (colorState == "rPlayer2") ? ("yellow") : (viewSettings.colorrPlayer2);
-                    ctx.font = "1.2vw Arial";
+                    ctx.font = "24px Arial";
                     ctx.fillStyle = viewSettings.colorlPlayer1;
                     ctx.beginPath()
                     ctx.fillText(viewSettings.lPlayer1, canvasWidth / 10, canvasHeight / 4.6);
@@ -156,9 +145,9 @@ let game =function (player1, player2, map, npc) {
                     viewSettings.ko = (string) ? (string) : (viewSettings.ko);
                     //-- KO--//
                     ctx.fillStyle = viewSettings.ko;
-                    ctx.font = "2.5vw Times New Roman";
+                    ctx.font = "50px Times New Roman";
                     ctx.beginPath();
-                    ctx.fillText("KO", canvasWidth / 2 - canvasWidth / 55, canvasHeight / 6);
+                    ctx.fillText("KO", canvasWidth / 2 - canvasWidth / 55, canvasHeight / 5.9);
                 };
 
                 self.endGame = function(win) {
@@ -168,9 +157,9 @@ let game =function (player1, player2, map, npc) {
                     ctx.shadowBlur = 5;
                     ctx.shadowColor = 'black';
                     ctx.fillStyle = 'white';
-                    ctx.font = "5vw Times New Roman";
+                    ctx.font = "88px Times New Roman";
                     ctx.beginPath();
-                    ctx.fillText(viewSettings.winner, canvasWidth / 2 - viewSettings.winner.length * 21 / 2, canvasHeight / 2);
+                    ctx.fillText(viewSettings.winner, canvasWidth / 2 - viewSettings.winner.length * 32 / 2, canvasHeight / 2);
                     //---shadows off---//
                     ctx.shadowOffsetY = 0;
                     ctx.shadowBlur = 0;
@@ -237,7 +226,7 @@ let game =function (player1, player2, map, npc) {
                     theEnd: false,
                     ko: false,
                     count: 1,
-                    stepForMove:10,
+                    stepForMove:20,
                     playerKO:0,
                     playerPoints:0,
                     npcRandom:null,
