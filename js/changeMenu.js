@@ -73,7 +73,7 @@ const spaFighter = {
             <li>Имя: <input id="name" type="email" name="login" placeholder="Ваше имя"></li>
             <li>Пароль: <input id="pass" type="password" name="pass" placeholder="Ваш пароль"></li>
             <li><div id="info"></div></li>
-            <li><button  class="form_button"  id="submit">Войти</button><button  class="form_button"  id="reg">Зарегистрироваться</button></li>
+            <li><div class="form_button"> <button  id="submit">Войти</button><button  id="reg">Зарегистрироваться</button></div></li>
             
         </form>
         <div class="enter_button"><button id="enter_button">Войти</button></div>
@@ -87,7 +87,7 @@ const spaFighter = {
                     </nav>`,
 //=======block characters 2=======//
         characters2: `<div class="characters">
-                        <div id="player1" style="grid-column: span 2;"><img src="img/characters/faces/ken.png"></div>
+                        <div id="player1" style="grid-column: span 2;  padding: 12%;"><img src="img/characters/faces/ken.png"></div>
 
                         <div class="faces">
                             <button value="0"><img src="img/characters/faces/ryu.png"> </button>
@@ -123,7 +123,7 @@ const spaFighter = {
                     </div>`,
 //=======block keys=======//
         keys: `<div class="characters">
-        <div class="maps">
+        <div class="stats">
                    <table id="allPlayersStats">
                    <tr><th><h3> Движение для 1 Игрока:</h3></th><th> <h3>Движение для 2 Игрока:</h3></th></tr>
                    <tr><th> w - прыжок</th><th>Arrow Up - прыжок</th></tr>
@@ -142,7 +142,7 @@ const spaFighter = {
                 </div>`,
 //=======block statistic=======//
         stats: `<div class="characters">
-        <div class="maps"><table id="allPlayersStats"></table></div>
+        <div class="stats"><table id="allPlayersStats"></table></div>
                 <div class="backNextButtons">
                     <button href="#main" value="8" >Назад</button>
                 </div>
